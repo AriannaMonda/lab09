@@ -14,8 +14,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.util.List;
+//import java.nio.file.Files;
+//import java.util.List;
 import java.util.Random;
 
 /**
@@ -44,8 +44,15 @@ public class BadIOGUI {
         canvas.setLayout(new BorderLayout());
         final JButton write = new JButton("Write on file");
         canvas.add(write, BorderLayout.CENTER);
-        frame.setContentPane(canvas);
+        //frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        /*
+         * New Panel
+         */
+        final JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS)); //horizontal
+        frame.getContentPane().add(panel, BorderLayout.CENTER);
+        panel.add(write);
         /*
          * Handlers
          */
