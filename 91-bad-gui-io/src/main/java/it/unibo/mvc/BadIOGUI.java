@@ -13,7 +13,13 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+//import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 //import java.nio.file.Files;
 //import java.util.List;
 import java.util.Random;
@@ -35,6 +41,7 @@ public class BadIOGUI {
     private static final int PROPORTION = 5;
     private final Random randomGenerator = new Random();
     private final JFrame frame = new JFrame(TITLE);
+    private List<String> list = new ArrayList<>();
 
     /**
      * Creates a new BadIOGUI.
@@ -45,14 +52,14 @@ public class BadIOGUI {
         final JButton write = new JButton("Write on file");
         final JButton read = new JButton("Read");
         canvas.add(write, BorderLayout.CENTER);
-        //frame.setContentPane(canvas);
+        frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         /*
          * New Panel
          */
         final JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS)); //horizontal
-        frame.getContentPane().add(panel, BorderLayout.CENTER);
+        canvas.add(panel, BorderLayout.CENTER);
         panel.add(write);
         panel.add(read);
         /*
@@ -78,9 +85,16 @@ public class BadIOGUI {
         });
 
         read.addActionListener(new ActionListener() {
+            private final Path filePath = Paths.get(PATH);
             @Override
             public void actionPerformed(final ActionEvent ignored) {
-                System.out.println("ciao");
+                try {
+                    list = Files.readAllLines(filePath, StandardCharsets.UTF_8);
+                    System.out.println(list); //NOPMD
+                } catch (final IOException e) {
+                    JOptionPane.showMessageDialog(frame, e, "Error", JOptionPane.ERROR_MESSAGE);
+                    e.printStackTrace(); // NOPMD: allowed as this is just an exercise
+                }
             }
         });
     }
