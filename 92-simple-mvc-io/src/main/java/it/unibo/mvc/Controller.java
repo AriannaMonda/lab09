@@ -7,6 +7,7 @@ import java.io.IOException;
  * Application controller. Performs the I/O.
  */
 public class Controller {
+    
     private static final String sep = System.getProperty("file.separator");
     public static final String FILE_NAME = System.getProperty("user.home") + sep + "output.txt";
     private File currentFile;
