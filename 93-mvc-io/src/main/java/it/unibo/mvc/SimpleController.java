@@ -9,13 +9,12 @@ import java.util.Objects;
  *
  */
 public final class SimpleController implements Controller {
-    private List<String> list = new ArrayList<>();
+    private final List<String> list = new ArrayList<>();
     private String currentString;
 
     @Override
     public void nextStringToPrint(String string) { 
         this.currentString = Objects.requireNonNull(string);
-        list.add(string);
     }
 
     @Override
@@ -26,16 +25,15 @@ public final class SimpleController implements Controller {
     @Override
     public List<String> getHistory() {
         return this.list;
-        
     }
 
     @Override
     public void printCurrentString() {
-        try {
-            System.out.println(currentString);
-        } catch (IllegalStateException e){
-            throw new IllegalStateException("Can not print the current string");
+        if(this.currentString == null){
+            throw new IllegalStateException("Cannot print the current string");
         }
+        list.add(currentString);
+        System.out.println(currentString);
     }
 
 }
