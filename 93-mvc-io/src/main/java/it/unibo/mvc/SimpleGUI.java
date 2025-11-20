@@ -19,7 +19,7 @@ import java.awt.event.ActionListener;
 public final class SimpleGUI {
     private static final int PROPORTION = 5;
     private final JFrame frame = new JFrame();
-    private SimpleController controller = new SimpleController();
+    private final SimpleController controller = new SimpleController();
     /**
      * SimpleGUIWithFileChooser.
      */
@@ -45,7 +45,6 @@ public final class SimpleGUI {
         panelB.add(historyButton, BorderLayout.EAST);
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        /** Handlers */
 
         printButton.addActionListener(new ActionListener() {
             /**
