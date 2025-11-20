@@ -21,7 +21,7 @@ public final class SimpleGUIWithFileChooser {
 
     private static final int PROPORTION = 5;
     private final JFrame frame = new JFrame();
-    private Controller controller = new Controller();
+    private final Controller controller = new Controller();
     /**
      * SimpleGUIWithFileChooser.
      */
@@ -40,11 +40,6 @@ public final class SimpleGUIWithFileChooser {
         panel.add(browseButton, BorderLayout.LINE_END);
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        /**
-         * Event handler for the "Browse..." button.
-         * Opens a file chooser and updates the text field with the selected file path.
-         */
-
         browseButton.addActionListener(new ActionListener() {
             /**
              * Invoked when the button is pressed.
@@ -60,6 +55,7 @@ public final class SimpleGUIWithFileChooser {
                     controller.setFile(fileChooser.getSelectedFile());
                     field.setText(controller.getFilePath());
                 } else if (result == JFileChooser.CANCEL_OPTION) {
+                    return; //NOPMD
                 } else {
                     JOptionPane.showMessageDialog(frame, "Error: ");
                 }

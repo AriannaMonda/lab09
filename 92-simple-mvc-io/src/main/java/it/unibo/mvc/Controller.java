@@ -1,8 +1,9 @@
 package it.unibo.mvc;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 /**
  * Application controller. Performs the I/O.
  */
@@ -55,7 +56,7 @@ public class Controller {
      */
 
     public void writeContent(final String content) throws IOException {
-        try (FileWriter writer = new FileWriter(this.currentFile.getPath())) {
+        try (var writer = Files.newBufferedWriter(this.currentFile.toPath(), StandardCharsets.UTF_8)) {
             writer.write(content);
         } // try-with-resources NON necessita il catch, non gestisco direttamente l'eccezione
     }

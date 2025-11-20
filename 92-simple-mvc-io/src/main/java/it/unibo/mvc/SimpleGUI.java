@@ -20,7 +20,7 @@ public final class SimpleGUI {
     private static final int PROPORTION = 5;
     private static final String TITLE = "My first java grahical interface";
     private final JFrame frame = new JFrame(TITLE);
-    private Controller controller = new Controller();
+    private final Controller controller = new Controller();
     /**
      * Creates the GUI and initializes all Swing components,
      * including the text area and the save button.
