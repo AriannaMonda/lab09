@@ -2,8 +2,9 @@ package it.unibo.mvc;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
+
 /**
  * Application controller. Performs the I/O.
  */
@@ -32,7 +33,7 @@ public class Controller {
     /**
      * Returns the file currently managed by the controller.
      *
-     * @return the current File object
+     * @return the current File
      */
 
     public File getFile() {
@@ -41,7 +42,7 @@ public class Controller {
     /**
      * Returns the path of the currently selected file.
      *
-     * @return the file path as a String
+     * @return the file path
      */
 
     public String getFilePath() {
@@ -56,8 +57,8 @@ public class Controller {
      */
 
     public void writeContent(final String content) throws IOException {
-        try (var writer = Files.newBufferedWriter(this.currentFile.toPath(), StandardCharsets.UTF_8)) {
-            writer.write(content);
+        try (PrintStream ps = new PrintStream(currentFile, StandardCharsets.UTF_8)) {
+            ps.println(content);
         } // try-with-resources NON necessita il catch, non gestisco direttamente l'eccezione
     }
 }

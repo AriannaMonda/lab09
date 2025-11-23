@@ -18,7 +18,7 @@ import java.io.IOException;
  */
 public final class SimpleGUI {
     private static final int PROPORTION = 5;
-    private static final String TITLE = "My first java grahical interface";
+    private static final String TITLE = "My first java graphical interface";
     private final JFrame frame = new JFrame(TITLE);
     private final Controller controller = new Controller();
     /**

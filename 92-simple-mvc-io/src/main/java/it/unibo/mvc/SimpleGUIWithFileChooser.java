@@ -5,6 +5,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import java.awt.BorderLayout;
@@ -12,6 +13,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 /**
  * A very simple program using a graphical interface.
  * 
@@ -33,6 +35,10 @@ public final class SimpleGUIWithFileChooser {
         final JPanel panel = new JPanel();
         final JTextField field = new JTextField(controller.getFilePath());
         field.setEditable(false);
+        final JTextArea textArea = new JTextArea();
+        canvas.add(textArea, BorderLayout.CENTER);
+        final JButton button = new JButton("Save");
+        canvas.add(button, BorderLayout.SOUTH);
         panel.setLayout(new BorderLayout());
         canvas.add(panel, BorderLayout.NORTH);
         panel.add(field, BorderLayout.CENTER);
@@ -41,12 +47,6 @@ public final class SimpleGUIWithFileChooser {
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         browseButton.addActionListener(new ActionListener() {
-            /**
-             * Invoked when the button is pressed.
-             *
-             * @param e the action event triggered by the button
-             * 
-             */
             @Override
             public void actionPerformed(final ActionEvent e) {
                 final JFileChooser fileChooser = new JFileChooser();
@@ -54,10 +54,18 @@ public final class SimpleGUIWithFileChooser {
                 if (result == JFileChooser.APPROVE_OPTION) {
                     controller.setFile(fileChooser.getSelectedFile());
                     field.setText(controller.getFilePath());
-                } else if (result == JFileChooser.CANCEL_OPTION) {
-                    return; //NOPMD
-                } else {
+                } else if (result != JFileChooser.CANCEL_OPTION) {
                     JOptionPane.showMessageDialog(frame, "Error: ");
+                }
+            }
+        });
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                try {
+                    controller.writeContent(textArea.getText());
+                } catch (final IOException ex) {
+                    throw new IllegalArgumentException("Error", ex);
                 }
             }
         });

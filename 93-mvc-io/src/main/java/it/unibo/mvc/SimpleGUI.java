@@ -47,12 +47,6 @@ public final class SimpleGUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         printButton.addActionListener(new ActionListener() {
-            /**
-             * Invoked when the button is pressed.
-             *
-             * @param e the action event triggered by the button
-             * 
-             */
             @Override
             public void actionPerformed(final ActionEvent e) {
                 final String toPrint = field.getText();
@@ -62,12 +56,6 @@ public final class SimpleGUI {
         });
 
         historyButton.addActionListener(new ActionListener() {
-            /**
-             * Invoked when the button is pressed.
-             *
-             * @param e the action event triggered by the button
-             * 
-             */
             @Override
             public void actionPerformed(final ActionEvent e) {
                 textArea.setText(controller.getHistory().toString());

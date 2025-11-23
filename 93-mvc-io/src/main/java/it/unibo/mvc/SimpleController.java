@@ -17,7 +17,7 @@ public final class SimpleController implements Controller {
     }
 
     @Override
-    public String geString() {
+    public String getString() {
         return this.currentString;
     }
 
